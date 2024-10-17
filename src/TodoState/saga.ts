@@ -1,7 +1,7 @@
-import {call, put, takeEvery, takeLatest} from 'redux-saga/effects'
+import {call, delay, put, takeEvery, takeLatest} from 'redux-saga/effects'
 import axios from 'axios';
 import { API_URL } from './store.constants';
-import { TodoActions, updateTodoSuccess, updateTodoFailure, fetchTodosSuccess,fetchTodosFailure, addTodosSuccess, addTodosFailure, deleteTodoSuccess } from './actions';
+import { TodoActions, updateTodoSuccess, updateTodoFailure, fetchTodosSuccess,fetchTodosFailure, addTodosSuccess, addTodosFailure, deleteTodoSuccess, deleteTodoFailure } from './actions';
 
 
 function* fetchTodos() {
@@ -44,7 +44,7 @@ function* updateTodo(action) {
 
 function* todoSaga() {
     yield takeLatest(TodoActions.FETCH_TODOS_REQUEST,fetchTodos);
-    yield takeEvery(TodoActions.ADD_TODO_REQUEST, addTodo);
+    yield takeLatest(TodoActions.ADD_TODO_REQUEST, addTodo);
     yield takeLatest(TodoActions.DELETE_TODO_REQUEST, deleteTodo);
     yield takeLatest(TodoActions.UPDATE_TODO_REQUEST, updateTodo);
 }
